@@ -13,7 +13,7 @@ export default function MainLayoutPage({ children }) {
             <div className="drawer-content">
                 <div className="flex justify-center border-b sticky top-0 backdrop-blur-md z-10">
                     <div className="flex items-center justify-between lg:py-5 py-3 w-full max-w-screen-2xl lg:px-10 px-5">
-                        <div className="flex items-center gap-3">
+                        <a href="/" className="flex items-center gap-3 w-fit">
                             <Image src={'/logo-sekolah-2.png'} width={20} height={20} alt="Logo Sekolah" className="lg:block hidden" />
                             <article>
                                 <h1 className="lg:text-xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-zinc-600">
@@ -23,12 +23,12 @@ export default function MainLayoutPage({ children }) {
                                     Sigap, Cepat, Tanggap, dan Kompetitif
                                 </h2>
                             </article>
-                        </div>
+                        </a>
                         <div className="flex items-center gap-10 ">
                             <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Profil
                             </a>
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                            <a href="/jurusan" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Jurusan
                             </a>
                             <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
@@ -40,7 +40,7 @@ export default function MainLayoutPage({ children }) {
                             <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Tenaga Kerja
                             </a>
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                            <a href="/aplikasi" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Aplikasi
                             </a>
                             <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
