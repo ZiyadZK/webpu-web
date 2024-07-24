@@ -21,4 +21,10 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .no-scroll {
+    scrollbar-width: none;
+  }
 }
+
+
