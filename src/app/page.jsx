@@ -1,7 +1,8 @@
 'use client'
 
 import MainLayoutPage from "@/components/mainLayout";
-import { faAngleRight, faArrowRight, faCheck, faComputer, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagramSquare } from "@fortawesome/free-brands-svg-icons";
+import { faAngleRight, faArrowRight, faCheck, faComputer, faGlobe, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Aos from "aos";
 import Image from "next/image";
@@ -250,6 +251,7 @@ export default function Home() {
           </a>
         </div>
       </div>
+      
     </>
 
   );
