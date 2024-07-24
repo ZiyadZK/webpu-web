@@ -4,7 +4,7 @@ import MainLayoutPage from "@/components/mainLayout"
 
 export default function AplikasiPage() {
     return (
-        <>
+        <MainLayoutPage>
             <div className="lg:px-20 px-5 py-5 min-h-screen flex justify-center">
                 <div className="max-w-screen-2xl w-full flex justify-center items-center">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10">
@@ -83,6 +83,6 @@ export default function AplikasiPage() {
                     </div>
                 </div>
             </div>
-        </>
+        </MainLayoutPage>
     )
 }

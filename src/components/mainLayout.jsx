@@ -49,6 +49,9 @@ export default function MainLayoutPage({ children }) {
                             <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Prestasi
                             </a>
+                            <button type="button" className="px-4 py-2 rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200">
+                                Masuk
+                            </button>
                             <label htmlFor="my-drawer" className="drawer-button opacity-50 hover:opacity-100 lg:hidden block">
                                 <FontAwesomeIcon icon={faBars} className="w-4 h-4 text-inherit" />
                             </label>

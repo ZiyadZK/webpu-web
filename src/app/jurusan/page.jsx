@@ -1,11 +1,12 @@
 'use client'
 
+import MainLayoutPage from "@/components/mainLayout"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function JurusanPage() {
     return (
-        <>
+        <MainLayoutPage>
             <div className="lg:px-20 px-5 py-5 min-h-screen flex justify-center">
                 <div className="w-full max-w-screen-lg space-y-5">
                     {Array.from({ length: 6 }).map((_, index) => (
@@ -50,6 +51,6 @@ export default function JurusanPage() {
                     ))}
                 </div>
             </div>
-        </>
+        </MainLayoutPage>
     )
 }

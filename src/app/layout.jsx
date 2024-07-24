@@ -12,9 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={jakarta.className + ` text-xs md:text-sm bg-white text-zinc-700`}>
-        <MainLayoutPage>
-          {children}
-        </MainLayoutPage>
+        {children}
       </body>
     </html>
   );

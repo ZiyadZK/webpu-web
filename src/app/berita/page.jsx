@@ -1,11 +1,12 @@
 'use client'
 
+import MainLayoutPage from "@/components/mainLayout"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function BeritaPage() {
     return (
-        <>
+        <MainLayoutPage>
             <div className="lg:px-20 px-5 py-5 min-h-screen flex justify-center">
                 <div className="max-w-screen-2xl w-full divide-y">
 
@@ -41,6 +42,6 @@ export default function BeritaPage() {
 
                 </div>
             </div>
-        </>
+        </MainLayoutPage>
     )
 }

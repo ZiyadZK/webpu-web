@@ -15,7 +15,7 @@ export default function Home() {
   }, [])
 
   return (
-    <>
+    <MainLayoutPage>
       <div className="lg:px-20 px-5 py-5 ">
         <div className="flex lg:flex-row flex-col items-center lg:justify-between gap-5">
           <div className="w-full lg:w-1/2 flex justify-center items-center">
@@ -252,7 +252,7 @@ export default function Home() {
         </div>
       </div>
       
-    </>
+    </MainLayoutPage>
 
   );
 }
