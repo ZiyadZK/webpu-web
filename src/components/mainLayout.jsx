@@ -11,7 +11,7 @@ export default function MainLayoutPage({ children }) {
         <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
-                <div className="flex justify-center border-b sticky top-0 backdrop-blur-md z-10">
+                <div className="flex justify-center border-b sticky top-0 z-10 bg-white">
                     <div className="flex items-center justify-between lg:py-5 py-3 w-full max-w-screen-2xl lg:px-10 px-5">
                         <a href="/" className="flex items-center gap-3 w-fit">
                             <Image src={'/logo-sekolah-2.png'} width={20} height={20} alt="Logo Sekolah" className="lg:block hidden" />
@@ -43,8 +43,8 @@ export default function MainLayoutPage({ children }) {
                             <a href="/aplikasi" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Aplikasi
                             </a>
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
-                                Artikel
+                            <a href="/berita" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Berita
                             </a>
                             <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Prestasi
