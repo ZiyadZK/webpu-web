@@ -24,14 +24,14 @@ export default function BeritaPage() {
                                     <h1 className="font-semibold text-xl lg:text-3xl">
                                         JUDUL BERITA DISINI
                                     </h1>
-                                    <hr className="my-2 opacity-0" />
+                                    <hr className="my-2 lg:my-4 opacity-0" />
                                     <p>
                                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem illum error aspernatur nulla omnis! Non voluptatibus voluptate, neque, porro quas, et magnam alias ducimus repellendus reiciendis explicabo pariatur similique mollitia.
                                         <br /> <br />
                                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos itaque vitae consectetur laboriosam incidunt debitis voluptates commodi minus nihil ab. Eaque quasi perferendis quaerat animi commodi laborum numquam cumque neque?
                                     </p>
-                                    <hr className="my-2 opacity-0" />
-                                    <a href="" className="px-4 py-2 rounded-full border flex items-center justify-center w-fit gap-3 hover:gap-4 hover:bg-zinc-50 hover:shadow-xl ease-out duration-200">
+                                    <hr className="my-2 lg:my-4 opacity-0" />
+                                    <a href={`/berita/${index}`} className="px-4 py-2 rounded-full border flex items-center justify-center w-fit gap-3 hover:gap-4 hover:bg-zinc-50 hover:shadow-xl ease-out duration-200">
                                         Lihat Berita
                                         <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4 text-inherit" />
                                     </a>

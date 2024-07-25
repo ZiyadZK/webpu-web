@@ -2,6 +2,9 @@ import MainLayoutPage from "@/components/mainLayout";
 import "./globals.css";
 import "animate.css/animate.compat.css"
 import { jakarta } from "@/lib/fonts";
+import 'ckeditor5/ckeditor5.css';
+
+import '../app/ckeditor.css'
 
 export const metadata = {
   title: "SMK Pekerjaan Umum Negeri Bandung",

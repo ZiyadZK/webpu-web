@@ -20,24 +20,24 @@ export default function MainLayoutPage({ children }) {
                                     SMK PU Negeri Bandung
                                 </h1>
                                 <h2 className="text-xs opacity-50 tracking-tighter">
-                                    Sigap, Cepat, Tanggap, dan Kompetitif
+                                    Smart, Responsive, Competitive
                                 </h2>
                             </article>
                         </a>
                         <div className="flex items-center gap-10 ">
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                            <a href="/profil" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Profil
                             </a>
                             <a href="/jurusan" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Jurusan
                             </a>
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                            <a href="/ekstrakurikuler" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Ekstrakurikuler
                             </a>
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                            <a href="/mitra" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Mitra
                             </a>
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                            <a href="/tenagakerja" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Tenaga Kerja
                             </a>
                             <a href="/aplikasi" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
@@ -46,10 +46,10 @@ export default function MainLayoutPage({ children }) {
                             <a href="/berita" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Berita
                             </a>
-                            <a href="" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                            <a href="/prestasi" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Prestasi
                             </a>
-                            <button type="button" className="px-4 py-2 rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200">
+                            <button type="button" onClick={() => document.getElementById('login_modal').showModal()} className="px-4 py-2 hidden sm:block rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200 active:scale-95">
                                 Masuk
                             </button>
                             <label htmlFor="my-drawer" className="drawer-button opacity-50 hover:opacity-100 lg:hidden block">
@@ -59,6 +59,16 @@ export default function MainLayoutPage({ children }) {
                     </div>
                 </div>
                 <div className="">
+                    <dialog id="login_modal" className="modal">
+                        <div className="modal-box">
+                            <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <h3 className="font-bold text-lg">Hello!</h3>
+                            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                        </div>
+                    </dialog>
                     {children}
                     <div className="lg:px-20 px-5 py-10 bg-zinc-800 flex justify-center">
                         <div className="max-w-screen-2xl w-full">
@@ -70,7 +80,7 @@ export default function MainLayoutPage({ children }) {
                                             SMK PU Negeri Bandung
                                         </h1>
                                         <h2 className="text-xs opacity-50 tracking-tighter text-zinc-200">
-                                            Sigap, Cepat, Tanggap, dan Kompetitif
+                                            Smart, Responsive, Competitive
                                         </h2>
                                     </article>
                                 </div>
