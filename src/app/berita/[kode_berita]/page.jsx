@@ -11,7 +11,7 @@ export default function DetailBeritaPage({ params: { kode_berita }}) {
         <MainLayoutPage>
             <div className="lg:px-20 px-5 py-5 min-h-screen flex justify-center">
                 <div className="max-w-screen-lg w-full relative">
-                    <button type="button" onClick={() => router.back()} className="px-4 py-2 rounded-full border-2 border-zinc-500 flex items-center justify-center gap-3 active:scale-95 ease-out duration-200 sticky top-20 lg:top-24 z-[20] bg-white hover:bg-zinc-500 hover:text-white shadow-lg">
+                    <button type="button" onClick={() => router.back()} className="px-4 py-2 rounded-full border-2 border-zinc-500 flex items-center justify-center gap-3 active:scale-95 ease-out duration-200  bg-white hover:bg-zinc-500 hover:text-white shadow-lg">
                         <FontAwesomeIcon icon={faArrowLeft} className="w-3 h-3 text-inherit" />
                         Kembali
                     </button>
