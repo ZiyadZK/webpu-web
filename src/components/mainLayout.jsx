@@ -34,9 +34,6 @@ export default function MainLayoutPage({ children }) {
                             <a href="/ekstrakurikuler" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Ekstrakurikuler
                             </a>
-                            <a href="/mitra" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
-                                Mitra
-                            </a>
                             <a href="/tenagakerja" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Tenaga Kerja
                             </a>
@@ -46,8 +43,8 @@ export default function MainLayoutPage({ children }) {
                             <a href="/berita" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Berita
                             </a>
-                            <a href="/prestasi" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
-                                Prestasi
+                            <a href="/lulusanterbaik" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Lulusan Terbaik
                             </a>
                             <button type="button" onClick={() => document.getElementById('login_modal').showModal()} className="px-4 py-2 hidden sm:block rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200 active:scale-95">
                                 Masuk
