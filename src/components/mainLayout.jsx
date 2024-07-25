@@ -2,7 +2,7 @@
 
 import { faFacebook, faInstagramSquare } from "@fortawesome/free-brands-svg-icons"
 import { faSun } from "@fortawesome/free-regular-svg-icons"
-import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRight, faBars, faEnvelope, faGlobe, faKey } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 
@@ -56,14 +56,50 @@ export default function MainLayoutPage({ children }) {
                     </div>
                 </div>
                 <div className="">
-                    <dialog id="login_modal" className="modal">
+                    <dialog id="login_modal" className="modal backdrop-blur-md">
                         <div className="modal-box">
                             <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                             </form>
-                            <h3 className="font-bold text-lg">Hello!</h3>
-                            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                            <h1 className="text-lg font-medium">
+                                Selamat Datang
+                            </h1>
+                            <hr className="my-3 opacity-0" />
+                            <p>
+                                Silahkan masuk menggunakan <span className="underline">Akun anda</span>.
+                            </p>
+                            <hr className="my-2 opacity-0" />
+                            <div className="relative h-10 flex items-center rounded-md border">
+                                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
+                                    <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-inherit opacity-50" />
+                                </div>
+                                <input type="text" className=" flex-grow outline-none" placeholder="Email akun anda" />
+                            </div>
+                            <hr className="my-1 opacity-0" />
+                            <div className="relative h-10 flex items-center rounded-md border">
+                                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
+                                    <FontAwesomeIcon icon={faKey} className="w-4 h-4 text-inherit opacity-50" />
+                                </div>
+                                <input type="text" className=" flex-grow outline-none" placeholder="Password akun anda" />
+                            </div>
+                            <hr className="my-1 opacity-0" />
+                            <div className="flex items-center gap-3 w-full">
+                                <input type="checkbox" />
+                                Ingat saya
+                            </div>
+                            <hr className="my-2 opacity-0" />
+                            <div className="flex justify-center">
+                                <button type="button" className="flex justify-center items-center gap-3 px-4 py-2 rounded-md bg-gradient-to-r from-rose-500 to-amber-500 text-white active:scale-90 hover:scale-95 ease-out duration-200">
+                                    Masuk
+                                    <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 text-inherit " />
+                                </button>
+                            </div>
+                            <hr className="my-2" />
+                            <div className="flex justify-center">
+                                <a href="" className="text-center underline hover:text-blue-500">
+                                    Lupa password?
+                                </a>
+                            </div>
                         </div>
                     </dialog>
                     {children}
@@ -96,10 +132,10 @@ export default function MainLayoutPage({ children }) {
                             <hr className="my-5 opacity-20" />
                             <div className="flex flex-col md:flex-row items-center md:justify-between gap-5">
                                 <p className="text-zinc-400 italic text-center md:text-start">
-                                Jl. Garut No.10, Kacapiring, Kec. Batununggal, Kota Bandung, Jawa Barat 40271
+                                    Jl. Garut No.10, Kacapiring, Kec. Batununggal, Kota Bandung, Jawa Barat 40271
                                 </p>
                                 <p className="text-zinc-400 italic text-center md:text-start">
-                                Copyright @ 2024 - SMK Pekerjaan Umum Negeri Bandung
+                                    Copyright @ 2024 - SMK Pekerjaan Umum Negeri Bandung
                                 </p>
                             </div>
                         </div>
@@ -108,11 +144,38 @@ export default function MainLayoutPage({ children }) {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                {/* Sidebar content here */}
-                <li><a>Sidebar Item 1</a></li>
-                <li><a>Sidebar Item 2</a></li>
-                </ul>
+                <div className="min-h-full bg-white backdrop-blur-md w-80">
+                    <hr className="my-9 sm:my-10" />
+                    <div className="px-5">
+                        <button type="button" onClick={() => document.getElementById('login_modal').showModal()} className="px-4 py-2 block sm:hidden rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200 active:scale-95">
+                            Masuk
+                        </button>
+                        <hr className="my-5" />
+                        <div className="space-y-5 sm:space-y-3 text-sm">
+                            <a href="/profil" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Profil
+                            </a>
+                            <a href="/jurusan" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Jurusan
+                            </a>
+                            <a href="/ekstrakurikuler" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Ekstrakurikuler
+                            </a>
+                            <a href="/tenagakerja" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Tenaga Kerja
+                            </a>
+                            <a href="/aplikasi" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Aplikasi
+                            </a>
+                            <a href="/berita" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Berita
+                            </a>
+                            <a href="/lulusanterbaik" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
+                                Lulusan Terbaik
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             </div>
         
