@@ -19,7 +19,7 @@ export default function MainDashboardPage({ children }) {
 
 
     return (
-        <div className="flex flex-col lg:flex-row gap-3">
+        <div className="flex flex-col lg:flex-row gap-3 relative">
             <div className="w-full lg:w-1/5 flex-shrink-0 flex lg:flex-col flex-row gap-10 lg:gap-5 relative overflow-auto *:flex-shrink-0 *:py-5 *:lg:py-0">
                 {link.map((value, index) => (
                     <a key={index} href={value.link} className={`md:text-lg hover:underline ease-out duration-200 opacity-60 hover:opacity-100 lg:flex lg:items-center lg:justify-between ${pathname === value.link && 'border-b-4 lg:border-b-0 border-zinc-700'}`}>
