@@ -52,7 +52,7 @@ export default function DashboardPage() {
                                     Sejarah
                                 </p>
                                 <div className="w-full">
-                                    <CkEditor />
+                                    <CkEditor defaultValue={'<b>a</b>'} />
                                 </div>
                             </div>
                             <button type="submit" className="px-4 py-2 rounded-md bg-green-500 hover:bg-green-400 active:bg-green-600 hover:scale-95 active:scale-90 ease-out duration-200 flex items-center gap-3 justify-center w-fit text-white">
