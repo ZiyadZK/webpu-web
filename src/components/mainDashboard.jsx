@@ -5,14 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { usePathname } from "next/navigation"
 
 const link = [
-    { name: 'Dashboard', link: '/dashboard'},
-    { name: 'Profil Sekolah', link: '/dashboard/profil'},
-    { name: 'Jurusan', link: '/dashboard/jurusan'},
-    { name: 'Ekstrakurikuler', link: '/dashboard/ekstrakurikuler'},
-    { name: 'Tenaga Kerja', link: '/dashboard/tenagakerja'},
-    { name: 'Aplikasi', link: '/dashboard/aplikasi'},
-    { name: 'Berita', link: '/dashboard/berita'},
-    { name: 'Lulusan Terbaik', link: '/dashboard/lulusanterbaik'},
+    { name: 'Dashboard', link: '/dashboard', role: ['Admin', 'Operator']},
+    { name: 'Jurusan', link: '/dashboard/jurusan', role: ['Admin', 'Operator']},
+    { name: 'Ekstrakurikuler', link: '/dashboard/ekstrakurikuler', role: ['Admin', 'Operator']},
+    { name: 'Tenaga Kerja', link: '/dashboard/tenagakerja', role: ['Admin']},
+    { name: 'Aplikasi', link: '/dashboard/aplikasi', role: ['Admin']},
+    { name: 'Berita', link: '/dashboard/berita', role: ['Admin', 'Operator']},
+    { name: 'Lulusan Terbaik', link: '/dashboard/lulusanterbaik', role: ['Admin', 'Operator']},
 ]
 
 export default function MainDashboardPage({ children }) {
