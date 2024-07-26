@@ -53,7 +53,6 @@ import {
 	TableToolbar,
 	TextPartLanguage,
 	TextTransformation,
-	Title,
 	Underline,
 	Undo
 } from 'ckeditor5';
@@ -168,7 +167,6 @@ export default function CkEditor({ defaultValue = '', setValue}) {
 			TableToolbar,
 			TextPartLanguage,
 			TextTransformation,
-			Title,
 			Underline,
 			Undo
 		],
@@ -283,18 +281,20 @@ export default function CkEditor({ defaultValue = '', setValue}) {
 	};
 
 	return (
-		<div>
-			<div className="main-container">
-				<div className="editor-container editor-container_document-editor" ref={editorContainerRef}>
+		<div className='w-full'>
+			<div className="main-container w-full">
+				<div className="editor-container editor-container_document-editor w-full" ref={editorContainerRef}>
 					<div className="editor-container__menu-bar" ref={editorMenuBarRef}></div>
 					<div className="editor-container__toolbar" ref={editorToolbarRef}></div>
-					<div className="editor-container__editor-wrapper">
-						<div className="editor-container__editor">
+					<div className="editor-container__editor-wrapper w-full">
+						<div className="editor-container__editor w-full">
 							<div ref={editorRef}>
 								{isLayoutReady && (
 									<CKEditor
-                                        onChange={e => setValue()}
+                                        
 										onReady={editor => {
+											editorToolbarRef.current.innerHTML = "";
+											editorMenuBarRef.current.innerHTML = "";
 											editorToolbarRef.current.appendChild(editor.ui.view.toolbar.element);
 											editorMenuBarRef.current.appendChild(editor.ui.view.menuBarView.element);
 										}}
@@ -304,6 +304,11 @@ export default function CkEditor({ defaultValue = '', setValue}) {
 										}}
 										editor={DecoupledEditor}
 										config={editorConfig}
+
+										data={defaultValue}
+										onChange={(event, editor) => {
+											setValue(editor.getData())
+										}}
 									/>
 								)}
 							</div>

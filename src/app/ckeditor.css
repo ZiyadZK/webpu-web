@@ -69,10 +69,10 @@
 .editor-container_document-editor .editor-container__editor .ck.ck-editor__editable {
 	box-sizing: border-box;
 	min-width: calc(210mm + 2px);
-	max-width: calc(210mm + 2px);
+	max-width: 100%;
 	min-height: 297mm;
 	height: fit-content;
-	padding: 20mm 12mm;
+	padding: 5mm;
 	border: 1px hsl(0, 0%, 82.7%) solid;
 	background: hsl(0, 0%, 100%);
 	box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.078);
