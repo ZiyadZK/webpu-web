@@ -36,15 +36,32 @@ export default function DashboardTenagaKerjaPage() {
                 <div className="max-w-screen-2xl w-full ">
                     <MainDashboardPage>
                         <div className="flex items-center gap-2">
-                            <button type="button" className="px-4 py-2 rounded-md bg-teal-500 hover:bg-teal-400 active:bg-teal-600 text-white ease-out duration-200 hover:scale-95 active:scale-90 flex items-center gap-3 justify-center w-1/2 sm:w-fit">
+                            <button type="button" onClick={() => document.getElementById('tambah_data').showModal()} className="px-4 py-2 rounded-md bg-teal-500 hover:bg-teal-400 active:bg-teal-600 text-white ease-out duration-200 hover:scale-95 active:scale-90 flex items-center gap-3 justify-center w-1/2 sm:w-fit">
                                 <FontAwesomeIcon icon={faPlus} className="w-3 h-3 text-inherit" />
                                 Tambah
                             </button>
-                            <button type="button" className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-400 active:bg-blue-600 text-white ease-out duration-200 hover:scale-95 active:scale-90 flex items-center gap-3 justify-center w-1/2 sm:w-fit">
+                            <dialog id="tambah_data" className="modal">
+                                <div className="modal-box">
+                                    <form method="dialog">
+                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                    </form>
+                                    <h3 className="font-bold text-lg">Tambah Data</h3>
+                                    <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                                </div>
+                            </dialog>
+                            <button type="button" onClick={() => document.getElementById('import_data').showModal()} className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-400 active:bg-blue-600 text-white ease-out duration-200 hover:scale-95 active:scale-90 flex items-center gap-3 justify-center w-1/2 sm:w-fit">
                                 <FontAwesomeIcon icon={faDownload} className="w-3 h-3 text-inherit" />
                                 Import
                             </button>
-
+                            <dialog id="import_data" className="modal">
+                                <div className="modal-box">
+                                    <form method="dialog">
+                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                    </form>
+                                    <h3 className="font-bold text-lg">Import Data</h3>
+                                    <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                                </div>
+                            </dialog>
                         </div>
                         <hr className="my-2 opacity-0" />
                         <div className="grid grid-cols-12 gap-2">
