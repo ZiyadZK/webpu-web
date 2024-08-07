@@ -13,7 +13,7 @@ import Swal from "sweetalert2"
 
 
 
-export default function MainLayoutPage({ children }) {
+export default function MainLayoutPage({ children, classNames }) {
 
     const router = useRouter()
 
@@ -65,8 +65,9 @@ export default function MainLayoutPage({ children }) {
 
     const submitLogout = async () => {
         const response = await M_Akun_logout()
-
+        
         if(response.success) {
+            router.push('/')
             setLoggedAkun(state => ({...state, status: 'fetched', data: null}))
             swalToast.fire({
                 title: 'Sukses',
@@ -85,12 +86,13 @@ export default function MainLayoutPage({ children }) {
     const getLoggedAkun = async () => {
         const responseLoggedAkun = await M_Akun_get_logged_akun()
 
-        setLoggedAkun(state => ({...state, status: 'looading'}))
+        setLoggedAkun(state => ({...state, status: 'loading'}))
         if(responseLoggedAkun.success) {
             setLoggedAkun(state => ({...state, status: 'fetched', data: responseLoggedAkun.data}))
-        }else{
-            setLoggedAkun(state => ({...state, status: 'looading', data: null }))
+            return
         }
+
+        setLoggedAkun(state => ({...state, status: 'fetched', data: null }))
     }
 
     useEffect(() => {
@@ -150,13 +152,25 @@ export default function MainLayoutPage({ children }) {
                                         <img src={`${process.env.NEXT_PUBLIC_API_PUBLIC_URL}/v1/data/foto/${loggedAkun['data']['foto_profil']['nama_file']}${loggedAkun['data']['foto_profil']['tipe']}`} alt="" />
                                     </div>
                                     <ul tabIndex={0} className="dropdown-content menu bg-white rounded-box z-[1] w-52 p-2 shadow">
+                                        <div className="p-3">
+                                            <p className="text-xs">
+                                                {loggedAkun['data']['nama_pegawai']}
+                                            </p>
+                                            <p className="text-xs opacity-50">
+                                                {loggedAkun['data']['email_pegawai']}
+                                            </p>
+                                            <hr className="my-2 opacity-0" />
+                                            <p className="text-xs px-2 py-1 rounded-full bg-zinc-100 w-fit tracking-tighter font-medium">
+                                                {loggedAkun['data']['role']}
+                                            </p>
+                                        </div>
                                         <li>
                                             <button type="button" onClick={() => router.push('/me')} className="flex items-center gap-3">
                                                 <FontAwesomeIcon icon={faUser} className="w-3 h-3 text-inherit" />
                                                 Profil Saya
                                             </button>
                                         </li>
-                                        {loggedAkun['role'] !== 'Guru / Karyawan' && (
+                                        {loggedAkun['data']['role'] !== 'Guru / Karyawan' && (
                                             <li>
                                                 <button type="button" onClick={() => router.push('/dashboard')} className="flex items-center gap-3">
                                                     <FontAwesomeIcon icon={faCogs} className="w-3 h-3 text-inherit" />

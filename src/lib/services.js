@@ -43,6 +43,7 @@ export const api_post = async (payload = {} || [], url = '/', base_url = process
         return {
             success: false,
             message: error.response?.data?.message,
+            message: error.response?.data?.data,
             debug: error.response?.data?.debug
         }
     }

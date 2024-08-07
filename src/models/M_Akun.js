@@ -34,7 +34,6 @@ export const M_Akun_login = async ({email, password, rememberMe}) => {
 
 export const M_Akun_get_logged_akun = async () => {
     try {
-        
         if(!cookies().has('userdata')) {
             return {
                 success: false,
@@ -42,7 +41,23 @@ export const M_Akun_get_logged_akun = async () => {
             }
         }
 
-        const response = await decryptKey(cookies().get('userdata').value)
+        let token = cookies().get('userdata').value
+        const responseVerify = await api_post({token}, '/v1/verify/userdata')
+
+        console.log(responseVerify.data)
+
+        if(!responseVerify.success) {
+            return {
+                success: false,
+                message: 'Terdapat kesalahan disaat memproses data, hubungi Administrator'
+            }
+        }
+
+        if(responseVerify.data.data) {
+            token = responseVerify.data.data
+        }
+
+        const response = await decryptKey(token)
 
         if(!response.success) {
             return {
