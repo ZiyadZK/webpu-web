@@ -20,6 +20,7 @@
     "axios": "^1.7.2",
     "ckeditor5": "^42.0.1",
     "clsx": "^2.1.1",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^11.3.8",
     "next": "14.2.4",
     "react": "^18",

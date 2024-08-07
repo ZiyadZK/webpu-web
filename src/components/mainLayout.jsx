@@ -1,12 +1,102 @@
 'use client'
 
+import { swalToast } from "@/lib/toast"
+import { M_Akun_get_logged_akun, M_Akun_login, M_Akun_logout } from "@/models/M_Akun"
 import { faFacebook, faInstagramSquare } from "@fortawesome/free-brands-svg-icons"
 import { faSun } from "@fortawesome/free-regular-svg-icons"
-import { faArrowRight, faBars, faEnvelope, faGlobe, faKey } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRight, faBars, faCogs, faEnvelope, faExclamationTriangle, faGlobe, faKey, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import Swal from "sweetalert2"
+
+
 
 export default function MainLayoutPage({ children }) {
+
+    const router = useRouter()
+
+    const [loggedAkun, setLoggedAkun] = useState({
+        status: '', data: null
+    })
+    const [loadingLogin, setLoadingLogin] = useState('')
+    const [loginAlert, setLoginAlert] = useState({
+        success: '', message: ''
+    })
+    
+    const submitLogin = async (e, modal) => {
+        e.preventDefault()
+        setLoadingLogin(state => 'loading')
+        setLoginAlert({
+            success: '', message: ''
+        })
+
+        const payload = {
+            email: e.target[0].value,
+            password: e.target[1].value,
+            rememberMe: e.target[2].checked
+        }
+
+        const response = await M_Akun_login(payload)
+
+        if(!response.success) {
+            setLoginAlert(response)
+        }else{
+            document.getElementById(modal).close()
+            swalToast.fire({
+                title: 'Sukses',
+                text: 'Anda berhasil masuk',
+                icon: 'success'
+            })
+
+            const responseLoggedAkun = await M_Akun_get_logged_akun()
+
+            setLoggedAkun(state => ({...state, status: 'looading'}))
+            if(responseLoggedAkun.success) {
+                setLoggedAkun(state => ({...state, status: 'fetched', data: responseLoggedAkun.data}))
+            }else{
+                setLoggedAkun(state => ({...state, status: 'looading', data: null }))
+            }
+
+        }
+        setLoadingLogin(state => 'fetched')
+    }
+
+    const submitLogout = async () => {
+        const response = await M_Akun_logout()
+
+        if(response.success) {
+            setLoggedAkun(state => ({...state, status: 'fetched', data: null}))
+            swalToast.fire({
+                title: 'Sukses',
+                text: 'Berhasil log out dari akun anda',
+                icon: 'success'
+            })
+        }else{
+            swalToast.fire({
+                title: 'Gagal',
+                text: response.message,
+                icon: 'error'
+            })
+        }
+    }
+
+    const getLoggedAkun = async () => {
+        const responseLoggedAkun = await M_Akun_get_logged_akun()
+
+        setLoggedAkun(state => ({...state, status: 'looading'}))
+        if(responseLoggedAkun.success) {
+            setLoggedAkun(state => ({...state, status: 'fetched', data: responseLoggedAkun.data}))
+        }else{
+            setLoggedAkun(state => ({...state, status: 'looading', data: null }))
+        }
+    }
+
+    useEffect(() => {
+        getLoggedAkun()
+    }, [])
+
     return (
         <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -46,9 +136,43 @@ export default function MainLayoutPage({ children }) {
                             <a href="/lulusanterbaik" className="hidden lg:flex items-center gap-2 relative opacity-50 hover:opacity-100">
                                 Lulusan Terbaik
                             </a>
-                            <button type="button" onClick={() => document.getElementById('login_modal').showModal()} className="px-4 py-2 hidden sm:block rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200 active:scale-95">
-                                Masuk
-                            </button>
+                            {loggedAkun['status'] !== 'fetched' && (
+                                <div className="loading loading-md opacity-50 loading-spinner"></div>
+                            )}
+                            {loggedAkun['status'] === 'fetched' && !loggedAkun['data'] && (
+                                <button type="button" onClick={() => document.getElementById('login_modal').showModal()} className="px-4 py-2 hidden sm:block rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200 active:scale-95">
+                                    Masuk
+                                </button>
+                            )}
+                            {loggedAkun['status'] === 'fetched' && loggedAkun['data'] && (
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="relative w-10 h-10 rounded-full overflow-hidden border ease-out duration-200 hover:scale-105 active:scale-95">
+                                        <img src={`${process.env.NEXT_PUBLIC_API_PUBLIC_URL}/v1/data/foto/${loggedAkun['data']['foto_profil']['nama_file']}${loggedAkun['data']['foto_profil']['tipe']}`} alt="" />
+                                    </div>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-white rounded-box z-[1] w-52 p-2 shadow">
+                                        <li>
+                                            <button type="button" onClick={() => router.push('/me')} className="flex items-center gap-3">
+                                                <FontAwesomeIcon icon={faUser} className="w-3 h-3 text-inherit" />
+                                                Profil Saya
+                                            </button>
+                                        </li>
+                                        {loggedAkun['role'] !== 'Guru / Karyawan' && (
+                                            <li>
+                                                <button type="button" onClick={() => router.push('/dashboard')} className="flex items-center gap-3">
+                                                    <FontAwesomeIcon icon={faCogs} className="w-3 h-3 text-inherit" />
+                                                    Dashboard
+                                                </button>
+                                            </li>
+                                        )}
+                                        <li>
+                                            <button type="button" onClick={() => submitLogout()} className="flex items-center gap-3 text-red-500">
+                                                <FontAwesomeIcon icon={faSignOut} className="w-3 h-3 text-inherit" />
+                                                Keluar
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                             <label htmlFor="my-drawer" className="drawer-button opacity-50 hover:opacity-100 lg:hidden block">
                                 <FontAwesomeIcon icon={faBars} className="w-4 h-4 text-inherit" />
                             </label>
@@ -68,32 +192,52 @@ export default function MainLayoutPage({ children }) {
                             <p>
                                 Silahkan masuk menggunakan <span className="underline">Akun anda</span>.
                             </p>
-                            <hr className="my-2 opacity-0" />
-                            <div className="relative h-10 flex items-center rounded-md border">
-                                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
-                                    <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-inherit opacity-50" />
+                            <hr className="my-3 opacity-0" />
+                            {loginAlert['success'] === false && (
+                                <div className="p-3 rounded-md border-2 border-red-500 bg-red-100 flex gap-3 text-red-500">
+                                    <FontAwesomeIcon icon={faExclamationTriangle} className="w-5 h-5 text-inherit flex-shrink-0" /> 
+                                    <p>
+                                        {loginAlert['message']}
+                                    </p>
                                 </div>
-                                <input type="text" className=" flex-grow outline-none" placeholder="Email akun anda" />
-                            </div>
-                            <hr className="my-1 opacity-0" />
-                            <div className="relative h-10 flex items-center rounded-md border">
-                                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
-                                    <FontAwesomeIcon icon={faKey} className="w-4 h-4 text-inherit opacity-50" />
-                                </div>
-                                <input type="text" className=" flex-grow outline-none" placeholder="Password akun anda" />
-                            </div>
-                            <hr className="my-1 opacity-0" />
-                            <div className="flex items-center gap-3 w-full">
-                                <input type="checkbox" />
-                                Ingat saya
-                            </div>
+                            )}
                             <hr className="my-2 opacity-0" />
-                            <div className="flex justify-center">
-                                <button type="button" className="flex justify-center items-center gap-3 px-4 py-2 rounded-md bg-gradient-to-r from-rose-500 to-amber-500 text-white active:scale-90 hover:scale-95 ease-out duration-200">
-                                    Masuk
-                                    <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 text-inherit " />
-                                </button>
-                            </div>
+                            <form onSubmit={(e) => submitLogin(e, 'login_modal')}>
+                                <div className="relative h-10 flex items-center rounded-md border">
+                                    <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
+                                        <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4 text-inherit opacity-50" />
+                                    </div>
+                                    <input type="text" required className=" flex-grow outline-none" placeholder="Email akun anda" />
+                                </div>
+                                <hr className="my-1 opacity-0" />
+                                <div className="relative h-10 flex items-center rounded-md border">
+                                    <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
+                                        <FontAwesomeIcon icon={faKey} className="w-4 h-4 text-inherit opacity-50" />
+                                    </div>
+                                    <input type="password" required className=" flex-grow outline-none" placeholder="Password akun anda" />
+                                </div>
+                                <hr className="my-1 opacity-0" />
+                                <div className="flex items-center gap-3 w-full">
+                                    <input type="checkbox" className="cursor-pointer" />
+                                    Ingat saya
+                                </div>
+                                <hr className="my-2 opacity-0" />
+                                {loadingLogin !== 'loading' && (
+                                    <div className="flex justify-center">
+                                        <button type="submit" className="flex justify-center items-center gap-3 px-4 py-2 rounded-md bg-gradient-to-r from-rose-500 to-amber-500 text-white active:scale-90 hover:scale-95 ease-out duration-200">
+                                            Masuk
+                                            <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 text-inherit " />
+                                        </button>
+                                    </div>
+                                )}
+                                {loadingLogin === 'loading' && (
+                                    <div className="flex justify-center">
+                                        <button type="button" disabled className="flex justify-center items-center gap-3 px-10 py-2 rounded-md bg-gradient-to-r from-rose-500 to-amber-500 text-white ">
+                                            <div className="loading loading-spinner loading-sm opacity-50 text-white"></div>
+                                        </button>
+                                    </div>
+                                )}
+                            </form>
                             <hr className="my-2" />
                             <div className="flex justify-center">
                                 <a href="" className="text-center underline hover:text-blue-500">
