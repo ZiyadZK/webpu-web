@@ -4,7 +4,7 @@ import { swalToast } from "@/lib/toast"
 import { M_Akun_get_logged_akun, M_Akun_login, M_Akun_logout } from "@/models/M_Akun"
 import { faFacebook, faInstagramSquare } from "@fortawesome/free-brands-svg-icons"
 import { faSun } from "@fortawesome/free-regular-svg-icons"
-import { faArrowRight, faBars, faCogs, faEnvelope, faExclamationTriangle, faGlobe, faKey, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRight, faBars, faCog, faCogs, faEnvelope, faExclamationTriangle, faGlobe, faKey, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -147,7 +147,7 @@ export default function MainLayoutPage({ children, classNames }) {
                                 </button>
                             )}
                             {loggedAkun['status'] === 'fetched' && loggedAkun['data'] && (
-                                <div className="dropdown dropdown-end">
+                                <div className="dropdown dropdown-end sm:inline-block hidden">
                                     <div tabIndex={0} role="button" className="relative w-10 h-10 rounded-full overflow-hidden border ease-out duration-200 hover:scale-105 active:scale-95">
                                         <img src={`${process.env.NEXT_PUBLIC_API_PUBLIC_URL}/v1/data/foto/${loggedAkun['data']['foto_profil']['nama_file']}${loggedAkun['data']['foto_profil']['tipe']}`} alt="" />
                                     </div>
@@ -305,9 +305,51 @@ export default function MainLayoutPage({ children, classNames }) {
                 <div className="min-h-full bg-white backdrop-blur-md w-80">
                     <hr className="my-9 sm:my-10" />
                     <div className="px-5">
-                        <button type="button" onClick={() => document.getElementById('login_modal').showModal()} className="px-4 py-2 block sm:hidden rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200 active:scale-95">
-                            Masuk
-                        </button>
+                        {loggedAkun['status'] !== 'fetched' && (
+                            <div className="loading loading-md opacity-50 loading-spinner"></div>
+                        )}
+                        {loggedAkun['status'] === 'fetched' && !loggedAkun['data'] && (
+                            <button type="button" onClick={() => document.getElementById('login_modal').showModal()} className="px-4 py-2 sm:hidden block rounded-full border-2 border-zinc-600 hover:bg-zinc-600 hover:text-white ease-out duration-200 active:scale-95">
+                                Masuk
+                            </button>
+                        )}
+                        {loggedAkun['status'] === 'fetched' && loggedAkun['data'] && (
+                            <>
+                                <div className="flex sm:hidden items-center gap-3">
+                                    <div className="w-12 h-12 relative overflow-hidden rounded-full flex-shrink-0">
+                                        <img className="w-full h-full aspect-square object-cover object-center" src={`${process.env.NEXT_PUBLIC_API_PUBLIC_URL}/v1/data/foto/${loggedAkun['data']['foto_profil']['nama_file']}${loggedAkun['data']['foto_profil']['tipe']}`} alt="" />
+                                    </div>
+                                    <div className="flex-grow">
+                                        <p className="text-xs">
+                                            {loggedAkun['data']['nama_pegawai']}
+                                        </p>
+                                        <p className="text-xs opacity-50">
+                                            {loggedAkun['data']['email_pegawai']}
+                                        </p>
+                                        <p className="text-xs px-2 py-1 rounded-full bg-zinc-100 w-fit tracking-tighter font-medium">
+                                            {loggedAkun['data']['role']}
+                                        </p>
+                                    </div>
+                                </div>
+                                <hr className="my-2 opacity-0 block sm:hidden" />
+                                <div className="p-3 rounded-xl bg-zinc-50 space-y-2 block sm:hidden">
+                                    <button type="button" onClick={() => router.push('/me')} className="p-3 rounded-md bg-white shadow flex items-center gap-3 font-medium w-full active:scale-95 ease-out duration-200">
+                                        <FontAwesomeIcon icon={faUser} className="w-3 h-3 text-inherit opacity-50" />
+                                        Profil Anda
+                                    </button>
+                                    {loggedAkun['data']['role'] !== 'Guru / Karyawan' && (
+                                        <button type="button" onClick={() => router.push('/dashboard')} className="p-3 rounded-md bg-white shadow flex items-center gap-3 font-medium w-full active:scale-95 ease-out duration-200">
+                                            <FontAwesomeIcon icon={faCogs} className="w-3 h-3 text-inherit opacity-50" />
+                                            Dashboard
+                                        </button>
+                                    )}
+                                    <button type="button" onClick={() => submitLogout()} className="p-3 rounded-md bg-white shadow flex text-red-500 items-center gap-3 font-medium w-full active:scale-95 ease-out duration-200">
+                                        <FontAwesomeIcon icon={faSignOut} className="w-3 h-3 text-inherit opacity-50" />
+                                        Keluar
+                                    </button>
+                                </div>
+                            </>
+                        )}
                         <hr className="my-5" />
                         <div className="space-y-5 sm:space-y-3 text-sm">
                             <a href="/profil" className="flex items-center gap-2 relative opacity-50 hover:opacity-100">
