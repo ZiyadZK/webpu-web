@@ -151,7 +151,7 @@ export default function MainLayoutPage({ children, classNames }) {
                                     <div tabIndex={0} role="button" className="relative w-10 h-10 rounded-full overflow-hidden border ease-out duration-200 hover:scale-105 active:scale-95">
                                         <img src={`${process.env.NEXT_PUBLIC_API_PUBLIC_URL}/v1/data/foto/${loggedAkun['data']['foto_profil']['nama_file']}${loggedAkun['data']['foto_profil']['tipe']}`} alt="" />
                                     </div>
-                                    <ul tabIndex={0} className="dropdown-content menu bg-white rounded-box z-[1] w-52 p-2 shadow">
+                                    <ul tabIndex={0} className="dropdown-content menu bg-white rounded-box z-[1] w-64 p-2 shadow">
                                         <div className="p-3">
                                             <p className="text-xs">
                                                 {loggedAkun['data']['nama_pegawai']}
