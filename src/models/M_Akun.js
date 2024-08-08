@@ -16,6 +16,7 @@ export const M_Akun_login = async ({email, password, rememberMe}) => {
             } )
         }
 
+
         return {
             success: response.success,
             data: response?.data,
@@ -23,11 +24,10 @@ export const M_Akun_login = async ({email, password, rememberMe}) => {
             debug: response?.debug
         }
     } catch (error) {
-        console.log(error)
         return {
             success: false,
-            message: error.message,
-            debug: error
+            message: error.response?.data?.message,
+            debug: error.response?.data
         }
     }
 }
@@ -50,6 +50,13 @@ export const M_Akun_get_logged_akun = async () => {
             return {
                 success: false,
                 message: 'Terdapat kesalahan disaat memproses data, hubungi Administrator'
+            }
+        }
+
+        if(!responseVerify.data.valid) {
+            return {
+                success: false,
+                message: responseVerify.data?.message
             }
         }
 
