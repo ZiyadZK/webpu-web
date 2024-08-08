@@ -103,15 +103,15 @@ export default function MainLayoutPage({ children, classNames }) {
         <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
-                <div className="flex justify-center border-b sticky top-0 z-10 bg-zinc-800">
+                <div className="flex justify-center border-b sticky top-0 z-10 bg-gradient-to-r from-white to-zinc-100">
                     <div className="flex items-center justify-between lg:py-5 py-3 w-full max-w-screen-2xl lg:px-10 px-5">
                         <a href="/" className="flex items-center gap-3 w-fit">
                             <Image src={'/logo-sekolah-2.png'} width={20} height={20} alt="Logo Sekolah" className="lg:block hidden" />
                             <article>
-                                <h1 className="lg:text-xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-white">
+                                <h1 className="lg:text-xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-zinc-900">
                                     SMK PU Negeri Bandung
                                 </h1>
-                                <h2 className="text-xs opacity-50 text-white tracking-tighter">
+                                <h2 className="text-xs opacity-50  tracking-tighter">
                                     Smart, Responsive, Competitive
                                 </h2>
                             </article>
