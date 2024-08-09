@@ -653,7 +653,7 @@ export default function DashboardTenagaKerjaPage() {
                         {loadingFetch === 'fetched' && data.length > 0 && (
                             <div className="relative overflow-auto max-h-[800px] divide-y border-x border-b rounded-b-2xl px-5">
                                 {filteredData.slice(filterData['pagination'] === 1 ? filterData['totalList'] - filterData['totalList'] : (filterData['totalList'] * filterData['pagination']) - filterData['totalList'], filterData['totalList'] * filterData['pagination']).map((value, index) => (
-                                    <div key={index} className="grid grid-cols-12 gap-2 py-5">
+                                    <div key={value['id_tenaga_kerja']} className="grid grid-cols-12 gap-2 py-5">
                                         <div className="col-span-1 flex items-center gap-2">
                                             <input type="checkbox" checked={selectedData.includes(value['id_tenaga_kerja'])} onChange={() => handleSelectData(value['id_tenaga_kerja'])}  />
                                             <button type="button" onClick={() => document.getElementById(`upload_${value['id_tenaga_kerja']}`).showModal()} className="w-10 h-10 flex-shrink-0 rounded-full relative overflow-hidden group">
