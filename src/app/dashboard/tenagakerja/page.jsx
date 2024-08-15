@@ -16,6 +16,7 @@ import Swal from "sweetalert2"
 const daftarRole = [
     { value: 'Guru / Karyawan', label: 'Guru / Karyawan' },
     { value: 'Administrator', label: 'Administrator' },
+    { value: 'Kepala Sekolah', label: 'Kepala Sekolah' },
     { value: 'Kurikulum', label: 'Kurikulum' },
     { value: 'Kesiswaan', label: 'Kesiswaan' },
     { value: 'Hubungan Inudstri dan Masyarakat', label: 'Hubungan Industri dan Masyarakat' },
