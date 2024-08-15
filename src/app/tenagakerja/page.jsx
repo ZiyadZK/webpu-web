@@ -10,7 +10,7 @@ import { useEffect, useState } from "react"
 export default function TenagaKerjaPage() {
 
     const [dataTenagaKerja, setDataTenagaKerja] = useState({
-        data: [], filteredData: [], loading: ''
+        data: [], filteredData: [], loading: '', kepsek: {}
     })
 
     const getDataTenagaKerja = async () => {
@@ -18,6 +18,11 @@ export default function TenagaKerjaPage() {
         const response = await M_Tenaga_Kerja_getAll()
         if(response.success) {
             setDataTenagaKerja(state => ({...state, data: response.data, filteredData: response.data}))
+            const dataKepsek = response.data.find(value => value['role'] === 'Kepala Sekolah')
+
+            if(dataKepsek) {
+                setDataTenagaKerja(state => ({...state, kepsek: dataKepsek}))
+            }
         }
         setDataTenagaKerja(state => ({...state, loading: 'fetched'}))
     }
@@ -28,9 +33,29 @@ export default function TenagaKerjaPage() {
 
     return (
         <MainLayoutPage>
-            <div className="lg:px-20 px-5 py-5 min-h-screen flex justify-center">
+            <div className="lg:px-20 px-5 py-5 min-h-screen flex justify-center ">
                 <div className={`max-w-screen-xl w-full ${lexand.className}`}>
 
+                    <hr className="my-5 opacity-0" />
+                    <div className="grid grid-cols-1 sm:grid-cols-2">
+                        <div className="flex justify-center items-center">
+                            <div className="aspect-square w-40 sm:w-60 lg:w-80 rounded-full overflow-hidden border">
+                                <img src="" alt="" />
+                            </div>
+                        </div>
+                        <div className=""></div>
+                    </div>
+                    <hr className="my-10 opacity-0" />
+                    <div className="flex justify-center items-center">
+                        <div className=" grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-5 gap-5">
+                            {Array.from(new Set(dataTenagaKerja['data'].map(value => value['role']))).map((role, index) => (
+                                <button key={index} type="button" className=" rounded-full px-4 py-2 hover:bg-zinc-100 ease-out duration-200">
+                                    {role}
+                                </button>
+                            ))}
+                            
+                        </div>
+                    </div>
                     <hr className="my-5 opacity-0" />
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                         {dataTenagaKerja['filteredData'].map((value, index) => (
@@ -41,7 +66,7 @@ export default function TenagaKerjaPage() {
                                         <div className="absolute bottom-0 left-0 w-full">
                                             <div className="flex justify-center w-full">
                                                 <div className="px-3 py-2 rounded-full bg-white border shadow-xl">
-                                                    <h1 className=" sm:text-lg lg:text-xl tracking-tighter opacity-70">
+                                                    <h1 className=" sm:text-lg lg:text-xl tracking-tighter opacity-70 text-center">
                                                         {value['role']}
                                                     </h1>
                                                 </div>
