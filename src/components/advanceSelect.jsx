@@ -29,6 +29,7 @@ export default function AdvanceSelect({
                 isMulti={multi}
                 menuPortalTarget={menuPortalTargetElement}
                 instanceId={useId()}
+                menuPosition='fixed'
                 styles={{
                     control: (baseStyles, state) => ({
                         ...baseStyles,
